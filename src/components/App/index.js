@@ -8,7 +8,7 @@ import WidgetMeteo from '../MeteoWidget';
 const App = () => (
   <div >
     
-   <WidgetMeteo/>
+   <WidgetMeteo city="anger" code={49}/>
   </div>
 );
 
