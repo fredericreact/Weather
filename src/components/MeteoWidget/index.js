@@ -1,8 +1,31 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 import './style.scss';
+import axios from 'axios';
+
+
+
 const WidgetMeteo = ({ city, code }) => {
-  const temperature = Math.random() * 60 - 20;
+    const [temperature, setTemperature] = useState(5)
+console.log(process.env)
+const { REACT_APP_API_URL, REACT_APP_API_TOKEN } = process.env;
+let baseUrl = REACT_APP_API_URL;
+let url = `${baseUrl}q=${city},fr&units=metric&appid=${REACT_APP_API_TOKEN}`
+
+    useEffect(()=>{
+        axios({
+            url,
+        })
+        .then((res)=>{
+            console.log(res);
+            setTemperature(res.data.main.temp)
+        })
+        .catch((err)=>{
+            console.log(err)
+        })
+    }, [])
+
+ 
   const getTemperatureHue = (percent) => {
     let min = 0;
     let max = 230;
@@ -25,7 +48,7 @@ const WidgetMeteo = ({ city, code }) => {
 
 
   const percent = getTemperaturePercentage(temperature);
-  const hue = getTemperaturePercentage(percent);
+  const hue = getTemperatureHue(percent);
 
   return (
     <article className="meteo">
