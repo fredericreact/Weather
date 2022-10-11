@@ -1,11 +1,14 @@
 // == Import npm
 import React from 'react';
+import './style.scss'
+
+import WidgetMeteo from '../MeteoWidget';
 
 // == Composant
 const App = () => (
   <div >
     
-    <h1>Composant : App</h1>
+   <WidgetMeteo/>
   </div>
 );
 
